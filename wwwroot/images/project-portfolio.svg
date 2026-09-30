@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2b0a0e"/><stop offset=".55" stop-color="#7a1220"/><stop offset="1" stop-color="#e62e2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="420" fill="url(#g)"/>
+  <circle cx="540" cy="60" r="120" fill="#ffffff" opacity=".08"/>
+  <circle cx="80" cy="360" r="140" fill="#000000" opacity=".25"/>
+  <rect x="48" y="48" width="150" height="34" rx="17" fill="#ffffff" opacity=".16"/>
+  <text x="64" y="71" font-family="Arial" font-size="16" font-weight="bold" fill="#fff" letter-spacing="2">MVC // 01</text>
+  <text x="48" y="200" font-family="Arial" font-size="52" font-weight="900" fill="#fff">RED//</text>
+  <text x="48" y="258" font-family="Arial" font-size="52" font-weight="900" fill="#ffd7d7">PORTFOLIO</text>
+  <text x="48" y="296" font-family="Arial" font-size="18" fill="#ffccd0">Prefinals Activity · Table of Contents · Comments</text>
+  <rect x="48" y="322" width="170" height="44" rx="22" fill="#fff"/>
+  <text x="72" y="350" font-family="Arial" font-size="17" font-weight="bold" fill="#c11125">● View Project</text>
+  <rect x="440" y="120" width="150" height="200" rx="16" fill="#0c0c0f" opacity=".85"/>
+  <rect x="458" y="140" width="114" height="14" rx="7" fill="#e62e2e"/>
+  <rect x="458" y="164" width="90" height="10" rx="5" fill="#3a3a44"/>
+  <rect x="458" y="184" width="100" height="10" rx="5" fill="#3a3a44"/>
+  <rect x="458" y="210" width="114" height="60" rx="10" fill="#1d1d24"/>
+  <circle cx="474" cy="292" r="10" fill="#e62e2e"/>
+  <rect x="490" y="286" width="70" height="12" rx="6" fill="#3a3a44"/>
+</svg>

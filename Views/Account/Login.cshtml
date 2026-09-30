@@ -1,0 +1,32 @@
+@model Lim_PreFinals_Quiz.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<section class="login-wrap">
+    <div class="login-card">
+        <div class="login-accent"></div>
+        <div class="login-body">
+            <div class="login-logo">R<span>//</span></div>
+            <h1>Welcome back</h1>
+            <p class="login-sub">Log in to post comments on projects.<br />Credentials are in <code>README.md</code>.</p>
+            <form asp-action="Login" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="ReturnUrl" />
+                <div asp-validation-summary="ModelOnly" class="val-summary"></div>
+                <label>Username</label>
+                <input asp-for="Username" autocomplete="username" placeholder="Enter username" />
+                <span asp-validation-for="Username" class="val"></span>
+                <label>Password</label>
+                <input asp-for="Password" type="password" autocomplete="current-password" placeholder="Enter password" />
+                <span asp-validation-for="Password" class="val"></span>
+                <button type="submit" class="btn-red block"><i class="bi bi-box-arrow-in-right"></i> Login</button>
+            </form>
+            <a class="login-back" asp-controller="Home" asp-action="Index"><i class="bi bi-arrow-left"></i> Back to portfolio</a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

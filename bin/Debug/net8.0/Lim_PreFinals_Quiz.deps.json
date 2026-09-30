@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Lim_PreFinals_Quiz/1.0.0": {
+        "runtime": {
+          "Lim_PreFinals_Quiz.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Lim_PreFinals_Quiz/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

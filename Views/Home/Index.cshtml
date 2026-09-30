@@ -1,0 +1,87 @@
+﻿@model List<Lim_PreFinals_Quiz.Models.Project>
+@{
+    ViewData["Title"] = "Lim, Gamaliel — Portfolio";
+    var q = (string?)ViewData["Query"];
+}
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-badge"><span class="dot"></span> Available for internships · IT Elective 2</div>
+        <h1 class="hero-title">LIM, <span class="red">GAMALIEL</span><br />RED//PORTFOLIO</h1>
+        <p class="hero-sub">ASP.NET Core MVC developer. Below are my GitHub projects — each with a live detail page and comment section.</p>
+        <div class="hero-actions">
+            <a href="#projects" class="btn-red"><i class="bi bi-grid-fill"></i> View projects</a>
+            <a class="btn-ghost" href="https://github.com/cocnigamaliel-star" target="_blank" rel="noopener"><i class="bi bi-github"></i> github.com/cocnigamaliel-star</a>
+        </div>
+        <form method="get" asp-action="Index" class="search-bar">
+            <i class="bi bi-search"></i>
+            <input name="q" value="@q" placeholder="Search projects, tech, category…" />
+            @if (!string.IsNullOrWhiteSpace(q)) { <a href="/" class="search-clear"><i class="bi bi-x-circle-fill"></i></a> }
+        </form>
+    </div>
+    <div class="hero-stats">
+        <div class="stat"><strong>@Model.Count</strong><span>Projects</span></div>
+        <div class="stat"><strong>2</strong><span>GitHub repos</span></div>
+        <div class="stat"><strong>MVC</strong><span>ASP.NET Core</span></div>
+    </div>
+</section>
+
+<div class="page-grid">
+    <!-- TABLE OF CONTENTS -->
+    <aside class="toc" id="toc">
+        <div class="toc-card">
+            <h3><i class="bi bi-list-ul"></i> Table of Contents</h3>
+            <ol>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <li><a href="#project-@Model[i].Id"><span class="toc-num">@(i + 1).ToString("00")</span> @Model[i].Title</a></li>
+                }
+            </ol>
+            <div class="toc-meta">
+                <p><i class="bi bi-person-badge"></i> Lim, Gamaliel</p>
+                <p><i class="bi bi-mortarboard"></i> IT Elective 2 · 31E1</p>
+                <a class="toc-login" asp-controller="Account" asp-action="Login"><i class="bi bi-box-arrow-in-right"></i> Login to comment</a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- PROJECT CARDS -->
+    <section class="projects" id="projects">
+        @if (!Model.Any())
+        {
+            <div class="empty">No projects match “@q”. <a href="/">Clear search</a></div>
+        }
+        @foreach (var p in Model)
+        {
+            <article class="card" id="project-@p.Id">
+                <a class="card-thumb" href="/Project/@p.Id">
+                    <img src="@Url.Content(p.Thumbnail)" alt="@p.Title thumbnail" loading="lazy" />
+                    <span class="card-cat">@p.Category</span>
+                </a>
+                <div class="card-body">
+                    <div class="card-year">@p.Year · Project @p.Id.ToString("00")</div>
+                    <h2 class="card-title"><a href="/Project/@p.Id">@p.Title</a></h2>
+                    <p class="card-desc">@p.ShortDescription</p>
+                    <div class="chips">
+                        @foreach (var t in p.TechStack) { <span class="chip">@t</span> }
+                    </div>
+                    <div class="card-actions">
+                        <a class="btn-red sm" href="/Project/@p.Id"><i class="bi bi-arrow-right-circle"></i> Details + comments</a>
+                        <a class="btn-ghost sm" href="@p.GitHubUrl" target="_blank" rel="noopener"><i class="bi bi-github"></i> Source</a>
+                    </div>
+                </div>
+            </article>
+        }
+
+        <!-- ABOUT -->
+        <section class="about" id="about">
+            <h3><span class="red">//</span> About me</h3>
+            <p>I'm <strong>Lim, Gamaliel</strong> (IT Elective 2, Section 31E1). I build web apps with ASP.NET Core MVC, C# and EF Core — from coursework like <em>ExamApp</em> to full portfolio sites like this one. This portfolio itself is one of my two featured GitHub projects.</p>
+            <div class="about-links">
+                <a href="https://github.com/cocnigamaliel-star/IT_ELECTIVE_2_A1_PREFINALS_LIM_GAMALIEL.git" target="_blank" rel="noopener"><i class="bi bi-github"></i> A1 Prefinals repo</a>
+                <a href="https://github.com/cocnigamaliel-star/cocnigamaliel-star-IT_ELECTIVE_2_31E1_PREFINAL_EXAM_Lim_Gamaliel.git" target="_blank" rel="noopener"><i class="bi bi-github"></i> Prefinal Exam repo</a>
+            </div>
+        </section>
+    </section>
+</div>

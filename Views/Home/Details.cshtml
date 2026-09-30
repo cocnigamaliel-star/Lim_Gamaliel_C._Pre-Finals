@@ -1,0 +1,79 @@
+@model Lim_PreFinals_Quiz.Models.Project
+@{
+    ViewData["Title"] = Model.Title;
+    var comments = (List<Lim_PreFinals_Quiz.Models.Comment>)(ViewData["Comments"] ?? new List<Lim_PreFinals_Quiz.Models.Comment>());
+    var username = Context.Session.GetString("Username");
+}
+
+<section class="detail-wrap">
+    <a class="back" href="/#project-@Model.Id"><i class="bi bi-arrow-left"></i> Back to all projects</a>
+
+    <div class="detail-grid">
+        <div class="detail-media">
+            <img src="@Url.Content(Model.Thumbnail)" alt="@Model.Title thumbnail" />
+            <div class="detail-cat">@Model.Category · @Model.Year</div>
+        </div>
+        <div class="detail-info">
+            <h1>@Model.Title</h1>
+            <p class="detail-short">@Model.ShortDescription</p>
+            <p class="detail-long">@Model.LongDescription</p>
+            <div class="chips">
+                @foreach (var t in Model.TechStack) { <span class="chip">@t</span> }
+            </div>
+            <div class="detail-actions">
+                <a class="btn-red sm" href="@Model.GitHubUrl" target="_blank" rel="noopener"><i class="bi bi-github"></i> View on GitHub</a>
+                @if (!string.IsNullOrEmpty(Model.LiveDemoUrl))
+                {
+                    <a class="btn-ghost sm" href="@Model.LiveDemoUrl" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Live demo</a>
+                }
+            </div>
+            <div class="repo-box"><i class="bi bi-link-45deg"></i><span>@Model.GitHubUrl</span></div>
+
+            <h3 class="feat-h"><span class="red">//</span> Key features</h3>
+            <ul class="feat-list">
+                @foreach (var f in Model.Features) { <li><i class="bi bi-check-circle-fill"></i> @f</li> }
+            </ul>
+        </div>
+    </div>
+
+    <!-- COMMENTS -->
+    <div class="comments" id="comments">
+        <h2><i class="bi bi-chat-dots-fill"></i> Comments <span class="count">@comments.Count</span></h2>
+
+        @if (string.IsNullOrEmpty(username))
+        {
+            <div class="login-cta">
+                <i class="bi bi-lock-fill"></i>
+                <p><strong>Login required to comment.</strong> Use the hardcoded account in <code>README.md</code>.</p>
+                <a class="btn-red sm" asp-controller="Account" asp-action="Login" asp-route-returnUrl="/Project/@Model.Id"><i class="bi bi-box-arrow-in-right"></i> Login to comment</a>
+            </div>
+        }
+        else
+        {
+            <form class="comment-form" method="post" action="/Project/@Model.Id/comment">
+                @Html.AntiForgeryToken()
+                <div class="cf-head"><i class="bi bi-person-circle"></i> Commenting as <strong>@username</strong></div>
+                <input type="hidden" name="Author" value="@username" />
+                <textarea name="Content" rows="3" maxlength="500" required minlength="2" placeholder="Share your thoughts on this project… (max 500 chars)"></textarea>
+                <button type="submit" class="btn-red sm"><i class="bi bi-send-fill"></i> Post comment</button>
+            </form>
+        }
+
+        <div class="comment-list">
+            @if (!comments.Any())
+            {
+                <p class="empty">No comments yet — be the first!</p>
+            }
+            @foreach (var c in comments)
+            {
+                <div class="comment">
+                    <div class="c-avatar">@c.Author.Trim().Substring(0, 1).ToUpper()</div>
+                    <div class="c-body">
+                        <div class="c-meta"><strong>@c.Author</strong> <span>· @c.CreatedAt.ToLocalTime().ToString("MMM d, yyyy h:mm tt")</span></div>
+                        <p>@c.Content</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
